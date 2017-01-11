@@ -12,7 +12,7 @@ def replacefilecontent():
     oldstring = "using System.Linq;"
     newstring = "using System.Collections.Generic;"
     for root, dirs, files in os.walk(path):
-        print(dirs)
+        dirs[:] = []
         for name in files:
             if name.endswith(".cs"):
                 filename = root + "/" + name

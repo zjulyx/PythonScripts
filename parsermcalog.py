@@ -22,7 +22,7 @@ def findandparse(originstring, guid, keyword, currentdict, beginchar, endchar):
         return
     value = getsubstring(originstring, index, beginchar, endchar)
     if keyword == "Timestamp":
-        value = value[value.find('=') + 1:value.find('T') + 6]
+        value = value[value.find('-') + 1:value.find('T') + 6]
     if keyword == "Msg":
         value = value.replace(',', ';')
         if keyword not in currentdict[guid]:
@@ -43,7 +43,7 @@ def findandparse(originstring, guid, keyword, currentdict, beginchar, endchar):
 
 def parsermcalog():
     """Parse rmca log by removing invalid entries and replacing some token"""
-    path = r"E:\Documents\OneDrive\Rmca"
+    path = r"E:\Documents\Rmca"
     outputfilename = r'RMCA_Log.csv'
     currentdict = {}
     keywords = {
@@ -57,7 +57,7 @@ def parsermcalog():
         "Category": ['=', '{']
     }
     for root, dirs, files in os.walk(path):
-        print(dirs)
+        dirs[:] = []
         content = "TrackingGuid"
         for keyword in keywords:
             content += ',' + keyword
